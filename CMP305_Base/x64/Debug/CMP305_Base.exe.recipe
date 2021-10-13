@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project>
+  <ProjectOutputs>
+    <ProjectOutput>
+      <FullPath>C:\Users\FMGameDev\GitHub\CGT\CMP305\CMP305_Lab02_ProceduralModelling\x64\Debug\CMP305_Base.exe</FullPath>
+    </ProjectOutput>
+  </ProjectOutputs>
+  <ContentFiles>
+    <ContentFile>
+      <FullPath>C:\Users\FMGameDev\GitHub\CGT\CMP305\CMP305_Lab02_ProceduralModelling\CMP305_Base\light_ps.cso</FullPath>
+    </ContentFile>
+    <ContentFile>
+      <FullPath>C:\Users\FMGameDev\GitHub\CGT\CMP305\CMP305_Lab02_ProceduralModelling\CMP305_Base\light_vs.cso</FullPath>
+    </ContentFile>
+  </ContentFiles>
+  <SatelliteDlls />
+  <NonRecipeFileRefs />
+</Project>

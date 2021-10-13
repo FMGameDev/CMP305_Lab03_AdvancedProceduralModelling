@@ -1,0 +1,25 @@
+﻿  TerrainMesh.cpp
+C:\Users\FMGameDev\GitHub\CGT\CMP305\CMP305_Lab02_ProceduralModelling\CMP305_Base\TerrainMesh.h(39,45): warning C4244: 'return': conversion from 'int' to 'const float', possible loss of data
+C:\Users\FMGameDev\GitHub\CGT\CMP305\CMP305_Lab02_ProceduralModelling\CMP305_Base\TerrainMesh.cpp(14,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+C:\Users\FMGameDev\GitHub\CGT\CMP305\CMP305_Lab02_ProceduralModelling\CMP305_Base\TerrainMesh.cpp(89,54): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\FMGameDev\GitHub\CGT\CMP305\CMP305_Lab02_ProceduralModelling\CMP305_Base\TerrainMesh.cpp(89,27): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\FMGameDev\GitHub\CGT\CMP305\CMP305_Lab02_ProceduralModelling\CMP305_Base\TerrainMesh.cpp(92,127): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\FMGameDev\GitHub\CGT\CMP305\CMP305_Lab02_ProceduralModelling\CMP305_Base\TerrainMesh.cpp(98,38): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\FMGameDev\GitHub\CGT\CMP305\CMP305_Lab02_ProceduralModelling\CMP305_Base\TerrainMesh.cpp(98,29): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\FMGameDev\GitHub\CGT\CMP305\CMP305_Lab02_ProceduralModelling\CMP305_Base\TerrainMesh.cpp(153,45): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\FMGameDev\GitHub\CGT\CMP305\CMP305_Lab02_ProceduralModelling\CMP305_Base\TerrainMesh.cpp(153,36): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\FMGameDev\GitHub\CGT\CMP305\CMP305_Lab02_ProceduralModelling\CMP305_Base\TerrainMesh.cpp(181,46): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\FMGameDev\GitHub\CGT\CMP305\CMP305_Lab02_ProceduralModelling\CMP305_Base\TerrainMesh.cpp(181,37): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\FMGameDev\GitHub\CGT\CMP305\CMP305_Lab02_ProceduralModelling\CMP305_Base\TerrainMesh.cpp(192,48): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\FMGameDev\GitHub\CGT\CMP305\CMP305_Lab02_ProceduralModelling\CMP305_Base\TerrainMesh.cpp(192,35): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\FMGameDev\GitHub\CGT\CMP305\CMP305_Lab02_ProceduralModelling\CMP305_Base\TerrainMesh.cpp(192,97): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\FMGameDev\GitHub\CGT\CMP305\CMP305_Lab02_ProceduralModelling\CMP305_Base\TerrainMesh.cpp(192,84): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\FMGameDev\GitHub\CGT\CMP305\CMP305_Lab02_ProceduralModelling\CMP305_Base\TerrainMesh.cpp(192,83): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\FMGameDev\GitHub\CGT\CMP305\CMP305_Lab02_ProceduralModelling\CMP305_Base\TerrainMesh.cpp(192,34): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\FMGameDev\GitHub\CGT\CMP305\CMP305_Lab02_ProceduralModelling\CMP305_Base\TerrainMesh.cpp(250,38): warning C4101: 'indexBufferDesc': unreferenced local variable
+C:\Users\FMGameDev\GitHub\CGT\CMP305\CMP305_Lab02_ProceduralModelling\CMP305_Base\TerrainMesh.cpp(251,25): warning C4101: 'vertexData': unreferenced local variable
+C:\Users\FMGameDev\GitHub\CGT\CMP305\CMP305_Lab02_ProceduralModelling\CMP305_Base\TerrainMesh.cpp(251,37): warning C4101: 'indexData': unreferenced local variable
+C:\Users\FMGameDev\GitHub\CGT\CMP305\CMP305_Lab02_ProceduralModelling\CMP305_Base\TerrainMesh.cpp(250,20): warning C4101: 'vertexBufferDesc': unreferenced local variable
+  Utils.cpp
+  Generating Code...
+  CMP305_Base.vcxproj -> C:\Users\FMGameDev\GitHub\CGT\CMP305\CMP305_Lab02_ProceduralModelling\x64\Debug\CMP305_Base.exe

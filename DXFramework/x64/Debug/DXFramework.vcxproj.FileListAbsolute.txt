@@ -1,0 +1,6 @@
+D:\Work\Abertay\CMP305\CMP301_Lighting-master\CMP301_Lighting-master\E3_Lighting\lib\Debug\DXFramework.pdb
+D:\Work\Abertay\CMP305\CMP301_Lighting-master\CMP301_Lighting-master\E3_Lighting\DXFramework\x64\Debug\DXFramework.pdb
+D:\Work\Abertay\CMP305\CMP301_Lighting-master\CMP305_Base\E3_Lighting\lib\Debug\DXFramework.pdb
+D:\Work\Abertay\CMP305\CMP301_Lighting-master\CMP305_Base\E3_Lighting\DXFramework\x64\Debug\DXFramework.pdb
+D:\Work\Abertay\CMP305\CMP301_Lighting-master\CMP305_Base\CMP305_Base\lib\Debug\DXFramework.pdb
+D:\Work\Abertay\CMP305\CMP301_Lighting-master\CMP305_Base\CMP305_Base\DXFramework\x64\Debug\DXFramework.pdb
