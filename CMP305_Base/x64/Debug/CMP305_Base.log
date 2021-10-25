@@ -1,4 +1,11 @@
-﻿  TerrainMesh.cpp
+﻿  App1.cpp
+C:\Users\FMGameDev\GitHub\CGT\CMP305\CMP305_Lab02_ProceduralModelling\CMP305_Base\TerrainMesh.h(39,45): warning C4244: 'return': conversion from 'int' to 'const float', possible loss of data
+C:\Users\FMGameDev\GitHub\CGT\CMP305\CMP305_Lab02_ProceduralModelling\CMP305_Base\App1.cpp(145,58): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\FMGameDev\GitHub\CGT\CMP305\CMP305_Lab02_ProceduralModelling\CMP305_Base\App1.cpp(145,52): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+  Emitter.cpp
+  Main.cpp
+C:\Users\FMGameDev\GitHub\CGT\CMP305\CMP305_Lab02_ProceduralModelling\CMP305_Base\TerrainMesh.h(39,45): warning C4244: 'return': conversion from 'int' to 'const float', possible loss of data
+  TerrainMesh.cpp
 C:\Users\FMGameDev\GitHub\CGT\CMP305\CMP305_Lab02_ProceduralModelling\CMP305_Base\TerrainMesh.h(39,45): warning C4244: 'return': conversion from 'int' to 'const float', possible loss of data
 C:\Users\FMGameDev\GitHub\CGT\CMP305\CMP305_Lab02_ProceduralModelling\CMP305_Base\TerrainMesh.cpp(14,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
 C:\Users\FMGameDev\GitHub\CGT\CMP305\CMP305_Lab02_ProceduralModelling\CMP305_Base\TerrainMesh.cpp(89,54): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data

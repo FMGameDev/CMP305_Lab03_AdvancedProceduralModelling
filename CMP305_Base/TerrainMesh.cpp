@@ -53,7 +53,7 @@ void TerrainMesh::BuildCustomHeightMap() {
 			height += (cos( (float)k * zFrequency * scale + zOffset) ) * zAmplitude; // Waves On z
 			height += (cos((float)k * zFrequency*2.0f * scale + zOffset)) * zAmplitude*0.5f; // Waves On z
 			height += (cos((float)k * zFrequency*4.0f * scale + zOffset)) * zAmplitude*0.25f; // Waves On z
-			heightMap[( k * resolution ) + i] = height;
+			heightMap[GetIndex(k, i)] = height;
 		}
 	}	
 }
@@ -65,7 +65,7 @@ void TerrainMesh::BuildRandomHeightMap(int min, int max)
 	{
 		for (int i = 0; i < (resolution); i++)
 		{
-			heightMap[(k * resolution) + i] = (float)Utils::GetRandom(min, max);; // random number in the range [min, max]
+			heightMap[GetIndex(k, i)] = (float)Utils::GetRandom(min, max);; // random number in the range [min, max]
 		}
 	}
 }
@@ -76,7 +76,7 @@ void TerrainMesh::Flatten()
 	{
 		for (int i = 0; i < (resolution); i++)
 		{
-			heightMap[(k * resolution) + i] = 0.0f;
+			heightMap[GetIndex(k, i)] = 0.0f;
 		}
 	}
 }
@@ -104,12 +104,12 @@ void TerrainMesh::Fault()
 			if (XMVectorGetY(crossResult) > 0) // left side
 			{
 				// move up
-				heightMap[(k * resolution) + i] += maxHeight;
+				heightMap[GetIndex(k, i)] += maxHeight;
 			}
 			else // right side
 			{
 				// move down
-				heightMap[(k * resolution) + i] -= maxHeight;
+				heightMap[GetIndex(k, i)] -= maxHeight;
 			}
 		}
 	}
@@ -123,7 +123,7 @@ void TerrainMesh::Smooth()
 	{
 		for (int i = 0; i < (resolution); i++)
 		{
-			smoothedHeightMap[(k * resolution) + i] = NeighboursAverage(i, k);;
+			smoothedHeightMap[GetIndex(k, i)] = NeighboursAverage(i, k);;
 		}
 	}
 
@@ -148,7 +148,7 @@ void TerrainMesh::ParticleDeposition()
 	{
 		for (int n = i - 1; n <= i + 1; n++)
 		{
-			if (InBounds(n, m) && heightMap[(m * resolution) + n] < heightMap[((int)lowest_height_point.z * resolution) + (int)lowest_height_point.x]) // avoid to check the center cell again and check if it is in bounds
+			if (InBounds(n, m) && heightMap[GetIndex(m, n)] < heightMap[((int)lowest_height_point.z * resolution) + (int)lowest_height_point.x]) // avoid to check the center cell again and check if it is in bounds
 			{
 				lowest_height_point = XMFLOAT3(n, 0.0f, m);// save the new lowest height point
 			}
@@ -176,7 +176,7 @@ void TerrainMesh::AntiParticleDeposition()
 	{
 		for (int n = i - 1; n <= i + 1; n++)
 		{
-			if (InBounds(n, m) && heightMap[(m * resolution) + n] > heightMap[((int)highest_height_point.z * resolution) + (int)highest_height_point.x]) // avoid to check the center cell again and check if it is in bounds
+			if (InBounds(n, m) && heightMap[GetIndex(m, n)] > heightMap[((int)highest_height_point.z * resolution) + (int)highest_height_point.x]) // avoid to check the center cell again and check if it is in bounds
 			{
 				highest_height_point = XMFLOAT3(n, 0.0f, m);// save the new lowest height point
 			}
@@ -215,7 +215,7 @@ float TerrainMesh::NeighboursAverage(int i, int k)
 		{
 			if (InBounds(n, m))
 			{
-				totalHeight += heightMap[(m * resolution) + n];
+				totalHeight += heightMap[GetIndex(m,n)];
 				numPoints++; // count this point
 			}
 		}
@@ -444,4 +444,69 @@ void TerrainMesh::CreateBuffers( ID3D11Device* device, VertexType* vertices, uns
 
 	// Create the index buffer.
 	device->CreateBuffer( &indexBufferDesc, &indexData, &indexBuffer );
+}
+
+
+void TerrainMesh::DiamondSquare(int row, int col, int size, float offset)
+{
+	// corners points [(m*n) localitation in the array heightMap]
+	int topLeft, topRight, bottomLeft, bottomRight;
+	int center;
+	float heightOffset = 10.0f;
+	float cornersAvg;
+
+	int m = 0; //m
+	int n = 0; //n
+
+	// get the height map indices of the corners 
+	topLeft = GetIndex(0, 0);
+	topRight = GetIndex(0, resolution - 1);
+	bottomLeft = GetIndex(resolution - 1, 0);
+	bottomRight = GetIndex(resolution - 1, 0);
+
+	// get the index of the height map center (middle point)
+	center = GetIndex((int)(resolution/2) + 1, (int)(resolution/2) + 1);
+
+
+	// Apply Square Step //
+
+	// Asign a random height to each corner
+	heightMap[topLeft] = Utils::GetRandom(-heightOffset, +heightOffset);
+	heightMap[topRight] = Utils::GetRandom(-heightOffset, +heightOffset);
+	heightMap[bottomLeft] = Utils::GetRandom(-heightOffset, +heightOffset);
+	heightMap[bottomRight] = Utils::GetRandom(-heightOffset, +heightOffset);
+
+	// calculate the average of the corners
+	cornersAvg = (heightMap[topLeft] + heightMap[topRight] + heightMap[bottomLeft] + heightMap[bottomRight]) / 4.0f;
+
+	// set the value to the middle point
+	heightMap[center] = cornersAvg + Utils::GetRandom(-heightOffset, +heightOffset);
+
+	// halves the random value for the next
+	heightOffset /= 2.0f;
+
+
+	// Apply Diamond Step //
+
+	//  Superior Diamond
+	int 
+	heightMap[topRight - topLeft - 1]
+
+}
+
+
+
+void TerrainMesh::SquareStep(int row, int col)
+{
+
+}
+
+void TerrainMesh::DiamondStep()
+{
+
+}
+
+int TerrainMesh::GetIndex(int m, int n)
+{
+	return ((m * resolution) + n);
 }

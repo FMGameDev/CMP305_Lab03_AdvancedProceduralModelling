@@ -6,7 +6,7 @@
 class TerrainMesh :
 	public PlaneMesh {
 public:
-	TerrainMesh( ID3D11Device* device, ID3D11DeviceContext* deviceContext, int resolution = 128 );
+	TerrainMesh( ID3D11Device* device, ID3D11DeviceContext* deviceContext, int resolution = 5 );
 	~TerrainMesh();
 
 	void Resize( int newResolution );
@@ -38,8 +38,13 @@ public:
 	const inline float GetZAmplitude() { return zAmplitude; }
 	const inline float GetMaxHeight() { return maxHeight; }
 
+	void DiamondSquare(int row, int col, int size, float offset);
+	void SquareStep(int row, int col);
+	void DiamondStep();
+
 private:
 	void CreateBuffers( ID3D11Device* device, VertexType* vertices, unsigned long* indices );
+	int GetIndex(int m, int n); // return the height map index
 
 	// check if a point is in the map/terrain
 	bool InBounds(int i, int k);
