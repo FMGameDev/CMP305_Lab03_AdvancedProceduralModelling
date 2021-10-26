@@ -16,7 +16,7 @@ void App1::init(HINSTANCE hinstance, HWND hwnd, int screenWidth, int screenHeigh
 	textureMgr->loadTexture(L"white", L"res/DefaultDiffuse.png");
 
 	// Create Mesh object and shader object
-	m_Terrain = new TerrainMesh(renderer->getDevice(), renderer->getDeviceContext());
+	m_Terrain = new TerrainMesh(renderer->getDevice(), renderer->getDeviceContext(), 5);
 	shader = new LightShader(renderer->getDevice(), hwnd);
 	
 	// Initialise light
@@ -107,60 +107,70 @@ void App1::gui()
 	// FPS
 	ImGui::Text("FPS: %.2f", timer->getFPS());
 
-	// Title for terrain settings
-	ImGui::Text("\nTerrain Settings:");
+	// Camera Position
+	XMFLOAT3 cameraPos = camera->getPosition();
+	ImGui::Text("Camera Pos: (%.2f, %.2f, %.2f", cameraPos.x, cameraPos.y, cameraPos.z);
+
+	// Title for terrain general settings
+	ImGui::Text("\nTerrain General Settings:");
 	// Wireframe mode
 	ImGui::Checkbox("Wireframe mode", &wireframeToggle);
 	// Resolution
-	ImGui::SliderInt("Resolution", &terrainResolution, 2, 1024);
-	// Regenerations
-	ImGui::Text("Frecuency:");
-	ImGui::SliderFloat("X-Frequency", &terrainXFrequency, 0.033f, 1.2f);
-	ImGui::SliderFloat("Z-Frequency", &terrainZFrequency, 0.033f, 1.2f);
+	int resolution = m_Terrain->GetResolution();
+	ImGui::SliderInt("Resolution", &resolution, 2, 1024);
+	if (resolution != m_Terrain->GetResolution()) {
+		m_Terrain->Resize(resolution);
+		m_Terrain->Flatten();
+		m_Terrain->Regenerate(renderer->getDevice(), renderer->getDeviceContext());
+	}
 
-	ImGui::Text("Amplitude:");
-	ImGui::SliderFloat("X-Amplitud", &terrainXAmplitude, 0.0f, 20.0f);
-	ImGui::SliderFloat("Z-Amplitud", &terrainZAmplitude, 0.0f, 20.0f);
+	// Regenerate completely the height map 
+	ImGui::Text("\n\nRebuild Height Map Functions:\n");
 
-	// button to apply the changes
-	if (ImGui::Button("Apply resolution, frecuency and amplitude")) {
-		if (terrainResolution != m_Terrain->GetResolution()) {
-			m_Terrain->Resize(terrainResolution);
-		}
-		if (terrainXFrequency != m_Terrain->GetXFrequency() || terrainZFrequency != m_Terrain->GetZFrequency())
-			m_Terrain->SetWavesFrequency(terrainXFrequency, terrainZFrequency);
-		if (terrainXAmplitude != m_Terrain->GetXAmplitude() || terrainZAmplitude != m_Terrain->GetZAmplitude())
-			m_Terrain->SetWavesAmplitude(terrainXAmplitude, terrainZAmplitude);
+	// Waves
+	ImGui::Text("\nTerrain Sin and Cos Waves:");
+	WavesData wavesData = m_Terrain->GetWavesData();
 
-		// build map height
+	float frequency[2] = { wavesData.frequency.x,  wavesData.frequency.z };
+	ImGui::SliderFloat2("Frequency (x and z)", frequency, 0.033f, 1.2f);
+	float amplitude[2] = { wavesData.amplitude.x,  wavesData.amplitude.z };
+	ImGui::SliderFloat2("Amplitud (x and z)", amplitude, 0.0f, 20.0f);
+	if (frequency[0] != wavesData.frequency.x || frequency[1] != wavesData.frequency.z ||
+		amplitude[0] != wavesData.amplitude.x || amplitude[1] != wavesData.amplitude.z)
+	{
+		wavesData.frequency.x = frequency[0];
+		wavesData.frequency.z = frequency[1];
+		wavesData.amplitude.x = amplitude[0];
+		wavesData.amplitude.z = amplitude[1];
+
+		m_Terrain->SetWavesData(wavesData);
 		m_Terrain->BuildCustomHeightMap();
 		m_Terrain->Regenerate(renderer->getDevice(), renderer->getDeviceContext());
 	}
 
 	// Random height field
-	ImGui::Text("\n");
 	ImGui::Text("\nRandom Height:\n");
 
 	// Max height field
-	ImGui::SliderInt("Max height", &terrainMaxHeight, 0.0f, 100.0f);
-	if (ImGui::Button("Randomise")) {
-		if (terrainResolution != m_Terrain->GetResolution()) {
-			m_Terrain->Resize(terrainResolution);
-		}
-		if (terrainMaxHeight != m_Terrain->GetMaxHeight())
-			m_Terrain->SetMaxHeight(terrainMaxHeight);
-
-		// build map height
-		m_Terrain->BuildRandomHeightMap(0, terrainMaxHeight);
+	float maxHeight = m_Terrain->GetMaxHeight();
+	ImGui::SliderFloat("Max height", &maxHeight, 0.0f, 100.0f);
+	if (maxHeight != m_Terrain->GetMaxHeight())
+	{
+		m_Terrain->SetMaxHeight(maxHeight);
+		m_Terrain->BuildRandomHeightMap(0, maxHeight);
 		m_Terrain->Regenerate(renderer->getDevice(), renderer->getDeviceContext());
 	}
 
-	// Apply White noise (random numbers between 0 and 1
+	// Apply White noise (random numbers between 0 and 1)
 	if (ImGui::Button("White Noise")) {
 		// build map height
 		m_Terrain->BuildRandomHeightMap(0, 1);
 		m_Terrain->Regenerate(renderer->getDevice(), renderer->getDeviceContext());
 	}
+
+
+	// Regenerate completely the height map 
+	ImGui::Text("\n\nModify Height Map functions:\n");
 
 	// Smooth
 	if (ImGui::Button("Smooth")) {
@@ -169,8 +179,8 @@ void App1::gui()
 	}
 	// Fault
 	if (ImGui::Button("Fault")) {
-		if (terrainMaxHeight != m_Terrain->GetMaxHeight())
-			m_Terrain->SetMaxHeight(terrainMaxHeight);
+		if (maxHeight != m_Terrain->GetMaxHeight())
+			m_Terrain->SetMaxHeight(maxHeight);
 		m_Terrain->Fault();
 		m_Terrain->Regenerate(renderer->getDevice(), renderer->getDeviceContext());
 	}
@@ -184,7 +194,6 @@ void App1::gui()
 		m_Terrain->ParticleDeposition();
 		m_Terrain->Regenerate(renderer->getDevice(), renderer->getDeviceContext());
 	}
-
 	// Anti-Particle Deposition
 	if (ImGui::Button("Anti-Particle Deposition")) {
 		m_Terrain->AntiParticleDeposition();

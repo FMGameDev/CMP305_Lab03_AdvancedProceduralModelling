@@ -3,46 +3,84 @@
 #include "Emitter.h"
 #include "Utils.h"
 
-class TerrainMesh :
-	public PlaneMesh {
+// Frecuency, amplitude and all the data for Waves
+struct WavesData
+{
+	WavesData()
+	{ 
+		// initialise values to 0
+		frequency = XMFLOAT3(0.0f, 0.0f, 0.0f);
+		amplitude = XMFLOAT3(0.0f, 0.0f, 0.0f);
+		offset = XMFLOAT3(0.0f, 0.0f, 0.0f);
+	}
+
+	XMFLOAT3 frequency;
+	XMFLOAT3 amplitude;
+	XMFLOAT3 offset;
+};
+
+class TerrainMesh : public PlaneMesh {
+
 public:
-	TerrainMesh( ID3D11Device* device, ID3D11DeviceContext* deviceContext, int resolution = 5 );
+	// Constructor Class
+	TerrainMesh( ID3D11Device* device, ID3D11DeviceContext* deviceContext, int resolution);
+	// Destructor class:
+	// - Cleanup the heightMap
+	// - Remove all the pointers created in this function
 	~TerrainMesh();
 
+	// Change the size of the terrain
 	void Resize( int newResolution );
-	void SetWavesFrequency(float newXFrequency, float newZFrequency) { xFrequency = newXFrequency; zFrequency = newZFrequency; };
-	void SetWavesAmplitude(float newXAmplitude, float newZAmplitude) { xAmplitude = newXAmplitude; zAmplitude = newZAmplitude; };
-	void SetMaxHeight(int newMaxHeight) { maxHeight = newMaxHeight; }
+
+	// Set up the heightmap and create or update the appropriate buffers
 	void Regenerate( ID3D11Device* device, ID3D11DeviceContext* deviceContext);
 
-	// set to 0 the height of every point
+
+	// Get the resolution of the terrain (The number of unit quad on x-axis and z-axis subtracting One))
+	int GetResolution()const { return resolution; }
+	// Get the waves data
+	WavesData GetWavesData()const { return wavesData; }
+	// Get the MaxHeight
+	float GetMaxHeight()const { return maxHeight; }
+
+	// Set the waves Data
+	void SetWavesData(WavesData newWavesData) { wavesData = newWavesData; };
+	// Set the max height for using it in the random height map
+	void SetMaxHeight(int newMaxHeight) { maxHeight = newMaxHeight; }
+
+
+	//// TERRAIN MANIPULATION HEIGHT MAP FUNCTIONS //// 
+
+	// BUILD HEIGHT MAP FROM 0 FUNCTIONS //
+	// 
+	// Filling an array of floats that represent the height values at each grid point.
+	// By producing a Sine a Cosene wave along the X-axis and Z-axis
+	void BuildCustomHeightMap();
+	// Filling an array of floats that represent the height values at each grid point.
+	// By using random numbers
+	void BuildRandomHeightMap(int min, int max);
+
+	// MODIFY HEIGHT MAP FUNCTIONS //
+	// Set to 0 the height of every point
 	void Flatten();
-	// Fault is made adding or subtracting the max height value
+	// Fault is made by adding or subtracting the max height value
 	void Fault();
 	// Algorithm from 3D Game Programming with Directx11 by Frank D. Luna (Page 603)
+	// Smooth all the terrain
 	void Smooth();
-	// Randomly distribute, or emit, particles across the surface of our terrain.
+	// It randomly distributes, or emits, particles across the surface of our terrain.
 	// Each time a particle "lands", raise the terrain a little
 	// As the particles stack up, you get natural raises in the terrain and organic features
 	// if there is a lower point to the left, right, up, down to the particle deposition then it is placed there.
 	void ParticleDeposition();
-	// susbtract height to the highest point surrounding the particle position
+	// Susbtract height to the highest point surrounding the particle position
 	void AntiParticleDeposition();
-	void BuildCustomHeightMap(); // build height map for customised frequency and amplitud
-	void BuildRandomHeightMap(int min, int max); // build height map with random numbers
-
-	const inline int GetResolution(){ return resolution; }
-	const inline float GetXFrequency() { return xFrequency; }
-	const inline float GetZFrequency() { return xFrequency; }
-	const inline float GetXAmplitude() { return xAmplitude; }
-	const inline float GetZAmplitude() { return zAmplitude; }
-	const inline float GetMaxHeight() { return maxHeight; }
-
+	// Apply the Diando-Square Algorithm to the terrain
 	void DiamondSquare(int row, int col, int size, float offset);
-	void SquareStep(int row, int col);
-	void DiamondStep();
 
 private:
+	//Create the vertex and index buffers that will be passed along to the graphics card for rendering
+	//For CMP305, you don't need to worry so much about how or why yet, but notice the Vertex buffer is DYNAMIC here as we are changing the values often
 	void CreateBuffers( ID3D11Device* device, VertexType* vertices, unsigned long* indices );
 	int GetIndex(int m, int n); // return the height map index
 
@@ -53,21 +91,18 @@ private:
 	// return a random position from the map
 	XMFLOAT3 GetRandomPos();
 
-	Emitter* emitter_;
-	
+	void SquareStep(int row, int col);
+	void DiamondStep();
+
 	const float m_UVscale = 10.0f;			//Tile the UV map 10 times across the plane
 	const float terrainSize = 100.0f;		//What is the width and height of our terrain
 	float* heightMap;
 
-	// Frecuency and Amplitude for Waves
-	float xFrequency = 0.1f;
-	float zFrequency = 0.033f;
+	// Object which will randomly emit particles across the terrain
+	Emitter* emitter;
 
-	float xAmplitude = 10.0f;
-	float zAmplitude = 10.0f;
-
-	float xOffset = 0.0f;
-	float zOffset = 0.0f;
-
-	int maxHeight = 20;  // max random height
+	// Data for creating waves using cos and sin
+	WavesData wavesData;
+	// Max height which will be randomly set in the function randomHeightMap
+	int maxHeight = 20;
 };
