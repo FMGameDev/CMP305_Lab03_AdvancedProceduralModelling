@@ -1,12 +1,25 @@
 ﻿  App1.cpp
-C:\Users\FMGameDev\GitHub\CGT\CMP305\CMP305_Lab03_AdvancedProceduralModelling\CMP305_Base\TerrainMesh.h(44,37): warning C4244: 'return': conversion from 'const int' to 'float', possible loss of data
-C:\Users\FMGameDev\GitHub\CGT\CMP305\CMP305_Lab03_AdvancedProceduralModelling\CMP305_Base\App1.cpp(159,27): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-C:\Users\FMGameDev\GitHub\CGT\CMP305\CMP305_Lab03_AdvancedProceduralModelling\CMP305_Base\App1.cpp(160,38): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-C:\Users\FMGameDev\GitHub\CGT\CMP305\CMP305_Lab03_AdvancedProceduralModelling\CMP305_Base\App1.cpp(183,28): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
   Main.cpp
-C:\Users\FMGameDev\GitHub\CGT\CMP305\CMP305_Lab03_AdvancedProceduralModelling\CMP305_Base\TerrainMesh.h(44,37): warning C4244: 'return': conversion from 'const int' to 'float', possible loss of data
+  TerrainMesh.cpp
+C:\Users\FMGameDev\GitHub\CGT\CMP305\CMP305_Lab03_AdvancedProceduralModelling\CMP305_Base\TerrainMesh.cpp(14,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+C:\Users\FMGameDev\GitHub\CGT\CMP305\CMP305_Lab03_AdvancedProceduralModelling\CMP305_Base\TerrainMesh.cpp(83,38): warning C4101: 'indexBufferDesc': unreferenced local variable
+C:\Users\FMGameDev\GitHub\CGT\CMP305\CMP305_Lab03_AdvancedProceduralModelling\CMP305_Base\TerrainMesh.cpp(84,25): warning C4101: 'vertexData': unreferenced local variable
+C:\Users\FMGameDev\GitHub\CGT\CMP305\CMP305_Lab03_AdvancedProceduralModelling\CMP305_Base\TerrainMesh.cpp(84,37): warning C4101: 'indexData': unreferenced local variable
+C:\Users\FMGameDev\GitHub\CGT\CMP305\CMP305_Lab03_AdvancedProceduralModelling\CMP305_Base\TerrainMesh.cpp(83,20): warning C4101: 'vertexBufferDesc': unreferenced local variable
+C:\Users\FMGameDev\GitHub\CGT\CMP305\CMP305_Lab03_AdvancedProceduralModelling\CMP305_Base\TerrainMesh.cpp(310,54): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\FMGameDev\GitHub\CGT\CMP305\CMP305_Lab03_AdvancedProceduralModelling\CMP305_Base\TerrainMesh.cpp(310,27): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\FMGameDev\GitHub\CGT\CMP305\CMP305_Lab03_AdvancedProceduralModelling\CMP305_Base\TerrainMesh.cpp(313,127): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\FMGameDev\GitHub\CGT\CMP305\CMP305_Lab03_AdvancedProceduralModelling\CMP305_Base\TerrainMesh.cpp(322,38): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\FMGameDev\GitHub\CGT\CMP305\CMP305_Lab03_AdvancedProceduralModelling\CMP305_Base\TerrainMesh.cpp(322,29): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\FMGameDev\GitHub\CGT\CMP305\CMP305_Lab03_AdvancedProceduralModelling\CMP305_Base\TerrainMesh.cpp(377,45): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\FMGameDev\GitHub\CGT\CMP305\CMP305_Lab03_AdvancedProceduralModelling\CMP305_Base\TerrainMesh.cpp(377,36): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\FMGameDev\GitHub\CGT\CMP305\CMP305_Lab03_AdvancedProceduralModelling\CMP305_Base\TerrainMesh.cpp(405,46): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\FMGameDev\GitHub\CGT\CMP305\CMP305_Lab03_AdvancedProceduralModelling\CMP305_Base\TerrainMesh.cpp(405,37): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\FMGameDev\GitHub\CGT\CMP305\CMP305_Lab03_AdvancedProceduralModelling\CMP305_Base\TerrainMesh.cpp(466,20): warning C4244: '/=': conversion from 'float' to 'int', possible loss of data
+C:\Users\FMGameDev\GitHub\CGT\CMP305\CMP305_Lab03_AdvancedProceduralModelling\CMP305_Base\TerrainMesh.cpp(430,6): warning C4101: 'center': unreferenced local variable
+C:\Users\FMGameDev\GitHub\CGT\CMP305\CMP305_Lab03_AdvancedProceduralModelling\CMP305_Base\TerrainMesh.cpp(509,60): warning C4244: '+=': conversion from 'float' to 'int', possible loss of data
+C:\Users\FMGameDev\GitHub\CGT\CMP305\CMP305_Lab03_AdvancedProceduralModelling\CMP305_Base\TerrainMesh.cpp(515,60): warning C4244: '+=': conversion from 'float' to 'int', possible loss of data
+C:\Users\FMGameDev\GitHub\CGT\CMP305\CMP305_Lab03_AdvancedProceduralModelling\CMP305_Base\TerrainMesh.cpp(521,60): warning C4244: '+=': conversion from 'float' to 'int', possible loss of data
+C:\Users\FMGameDev\GitHub\CGT\CMP305\CMP305_Lab03_AdvancedProceduralModelling\CMP305_Base\TerrainMesh.cpp(527,60): warning C4244: '+=': conversion from 'float' to 'int', possible loss of data
   Generating Code...
-DXFramework.lib(WICTextureLoader.obj) : warning LNK4099: PDB 'DirectXTK.pdb' was not found with 'DXFramework.lib(WICTextureLoader.obj)' or at 'C:\Users\FMGameDev\GitHub\CGT\CMP305\CMP305_Lab03_AdvancedProceduralModelling\x64\Debug\DirectXTK.pdb'; linking object as if no debug info
-DXFramework.lib(pch.obj) : warning LNK4099: PDB 'DirectXTK.pdb' was not found with 'DXFramework.lib(pch.obj)' or at 'C:\Users\FMGameDev\GitHub\CGT\CMP305\CMP305_Lab03_AdvancedProceduralModelling\x64\Debug\DirectXTK.pdb'; linking object as if no debug info
-DXFramework.lib(DDSTextureLoader.obj) : warning LNK4099: PDB 'DirectXTK.pdb' was not found with 'DXFramework.lib(DDSTextureLoader.obj)' or at 'C:\Users\FMGameDev\GitHub\CGT\CMP305\CMP305_Lab03_AdvancedProceduralModelling\x64\Debug\DirectXTK.pdb'; linking object as if no debug info
   CMP305_Base.vcxproj -> C:\Users\FMGameDev\GitHub\CGT\CMP305\CMP305_Lab03_AdvancedProceduralModelling\x64\Debug\CMP305_Base.exe

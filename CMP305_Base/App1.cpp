@@ -109,7 +109,7 @@ void App1::gui()
 
 	// Camera Position
 	XMFLOAT3 cameraPos = camera->getPosition();
-	ImGui::Text("Camera Pos: (%.2f, %.2f, %.2f", cameraPos.x, cameraPos.y, cameraPos.z);
+	ImGui::Text("Camera Pos: (%.2f, %.2f, %.2f)", cameraPos.x, cameraPos.y, cameraPos.z);
 
 	// Title for terrain general settings
 	ImGui::Text("\nTerrain General Settings:");
@@ -117,11 +117,22 @@ void App1::gui()
 	ImGui::Checkbox("Wireframe mode", &wireframeToggle);
 	// Resolution
 	int resolution = m_Terrain->GetResolution();
-	ImGui::SliderInt("Resolution", &resolution, 2, 1024);
+	ImGui::Text("(2^n)+1: 3, 5, 9, 17, 33, 65, 129, 257, 513, 1025");
+	ImGui::SliderInt("Resolution", &resolution, 2, 1025);
 	if (resolution != m_Terrain->GetResolution()) {
 		m_Terrain->Resize(resolution);
 		m_Terrain->Flatten();
 		m_Terrain->Regenerate(renderer->getDevice(), renderer->getDeviceContext());
+	}
+	// Set Height Offset Range
+	Range heightOffsetRange = m_Terrain->GetHeightOffsetRange();
+	float range[2] = { heightOffsetRange.min, heightOffsetRange.max };
+	ImGui::SliderFloat2("Height Offset Range (min-max)", range, 0.0f, 50.0f);
+	if (range[0] != heightOffsetRange.min || range[1] != heightOffsetRange.max)
+	{
+		heightOffsetRange.min = range[0];
+		heightOffsetRange.max = range[1];
+		m_Terrain->SetHeightOffsetRange(heightOffsetRange);
 	}
 
 	// Regenerate completely the height map 
@@ -132,9 +143,9 @@ void App1::gui()
 	WavesData wavesData = m_Terrain->GetWavesData();
 
 	float frequency[2] = { wavesData.frequency.x,  wavesData.frequency.z };
-	ImGui::SliderFloat2("Frequency (x and z)", frequency, 0.033f, 1.2f);
+	ImGui::SliderFloat2("Frequency (x,z)", frequency, 0.033f, 1.2f);
 	float amplitude[2] = { wavesData.amplitude.x,  wavesData.amplitude.z };
-	ImGui::SliderFloat2("Amplitud (x and z)", amplitude, 0.0f, 20.0f);
+	ImGui::SliderFloat2("Amplitud (x,z)", amplitude, 0.0f, 20.0f);
 	if (frequency[0] != wavesData.frequency.x || frequency[1] != wavesData.frequency.z ||
 		amplitude[0] != wavesData.amplitude.x || amplitude[1] != wavesData.amplitude.z)
 	{
@@ -144,30 +155,25 @@ void App1::gui()
 		wavesData.amplitude.z = amplitude[1];
 
 		m_Terrain->SetWavesData(wavesData);
+	}
+	if (ImGui::Button("Create Waves"))
+	{
 		m_Terrain->BuildCustomHeightMap();
 		m_Terrain->Regenerate(renderer->getDevice(), renderer->getDeviceContext());
 	}
 
-	// Random height field
-	ImGui::Text("\nRandom Height:\n");
-
-	// Max height field
-	float maxHeight = m_Terrain->GetMaxHeight();
-	ImGui::SliderFloat("Max height", &maxHeight, 0.0f, 100.0f);
-	if (maxHeight != m_Terrain->GetMaxHeight())
-	{
-		m_Terrain->SetMaxHeight(maxHeight);
-		m_Terrain->BuildRandomHeightMap(0, maxHeight);
-		m_Terrain->Regenerate(renderer->getDevice(), renderer->getDeviceContext());
-	}
-
-	// Apply White noise (random numbers between 0 and 1)
-	if (ImGui::Button("White Noise")) {
+	// Apply Random Height
+	if (ImGui::Button("Random Height")) {
 		// build map height
-		m_Terrain->BuildRandomHeightMap(0, 1);
+		m_Terrain->BuildRandomHeightMap();
 		m_Terrain->Regenerate(renderer->getDevice(), renderer->getDeviceContext());
 	}
 
+	// Diamond
+	if (ImGui::Button("Diamond-Square Algorithm")) {
+		m_Terrain->DiamondSquareAlgorithm();
+		m_Terrain->Regenerate(renderer->getDevice(), renderer->getDeviceContext());
+	}
 
 	// Regenerate completely the height map 
 	ImGui::Text("\n\nModify Height Map functions:\n");
@@ -179,8 +185,6 @@ void App1::gui()
 	}
 	// Fault
 	if (ImGui::Button("Fault")) {
-		if (maxHeight != m_Terrain->GetMaxHeight())
-			m_Terrain->SetMaxHeight(maxHeight);
 		m_Terrain->Fault();
 		m_Terrain->Regenerate(renderer->getDevice(), renderer->getDeviceContext());
 	}
@@ -199,6 +203,7 @@ void App1::gui()
 		m_Terrain->AntiParticleDeposition();
 		m_Terrain->Regenerate(renderer->getDevice(), renderer->getDeviceContext());
 	}
+
 
 	// Render UI
 	ImGui::Render();

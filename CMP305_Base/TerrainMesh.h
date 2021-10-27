@@ -40,13 +40,13 @@ public:
 	int GetResolution()const { return resolution; }
 	// Get the waves data
 	WavesData GetWavesData()const { return wavesData; }
-	// Get the MaxHeight
-	float GetMaxHeight()const { return maxHeight; }
+	// Get the Max and min Height used for getting random height values
+	Range GetHeightOffsetRange()const { return heightOffsetRange; }
 
 	// Set the waves Data
 	void SetWavesData(WavesData newWavesData) { wavesData = newWavesData; };
 	// Set the max height for using it in the random height map
-	void SetMaxHeight(int newMaxHeight) { maxHeight = newMaxHeight; }
+	void SetHeightOffsetRange(Range newHeightOffsetRange) { heightOffsetRange = newHeightOffsetRange; }
 
 
 	//// TERRAIN MANIPULATION HEIGHT MAP FUNCTIONS //// 
@@ -57,8 +57,8 @@ public:
 	// By producing a Sine a Cosene wave along the X-axis and Z-axis
 	void BuildCustomHeightMap();
 	// Filling an array of floats that represent the height values at each grid point.
-	// By using random numbers
-	void BuildRandomHeightMap(int min, int max);
+	// By using random numbers in the height offset range
+	void BuildRandomHeightMap();
 
 	// MODIFY HEIGHT MAP FUNCTIONS //
 	// Set to 0 the height of every point
@@ -75,24 +75,25 @@ public:
 	void ParticleDeposition();
 	// Susbtract height to the highest point surrounding the particle position
 	void AntiParticleDeposition();
-	// Apply the Diando-Square Algorithm to the terrain
-	void DiamondSquare(int row, int col, int size, float offset);
+	// Apply the Diando-Square (Midpoint Displacement) Algorithm to the terrain
+	// It has been based on the pseudocode: https://www.youtube.com/watch?v=4GuAV1PnurU&t=796s
+	void DiamondSquareAlgorithm();
 
 private:
 	//Create the vertex and index buffers that will be passed along to the graphics card for rendering
 	//For CMP305, you don't need to worry so much about how or why yet, but notice the Vertex buffer is DYNAMIC here as we are changing the values often
 	void CreateBuffers( ID3D11Device* device, VertexType* vertices, unsigned long* indices );
-	int GetIndex(int m, int n); // return the height map index
+	int GetHeightMapIndex(int m, int n); // return the height map index
 
 	// check if a point is in the map/terrain
-	bool InBounds(int i, int k);
+	bool InBounds(int m, int n);
 	// return the height average of the neighbours to that point (inluding that point too)
-	float NeighboursAverage(int i, int k);
+	float NeighboursAverage(int m, int n);
 	// return a random position from the map
 	XMFLOAT3 GetRandomPos();
 
-	void SquareStep(int row, int col);
-	void DiamondStep();
+	void SquareStep(int& m_start, int& m_end, int& n_start, int& n_end, int& chunkSize, Range& tmpHeightOffsetRange, int& half);
+	void DiamondStep(int& m_start, int& m_end, int& n_start, int& n_end, int& chunkSize, Range& tmpHeightOffsetRange, int& half);
 
 	const float m_UVscale = 10.0f;			//Tile the UV map 10 times across the plane
 	const float terrainSize = 100.0f;		//What is the width and height of our terrain
@@ -103,6 +104,6 @@ private:
 
 	// Data for creating waves using cos and sin
 	WavesData wavesData;
-	// Max height which will be randomly set in the function randomHeightMap
-	int maxHeight = 20;
+	// Max and min values which will be used for getting a random value/height
+	Range heightOffsetRange; 
 };
