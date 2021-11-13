@@ -17,9 +17,6 @@ C:\Users\FMGameDev\GitHub\CGT\CMP305\CMP305_Lab03_AdvancedProceduralModelling\CM
 C:\Users\FMGameDev\GitHub\CGT\CMP305\CMP305_Lab03_AdvancedProceduralModelling\CMP305_Base\TerrainMesh.cpp(405,37): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
 C:\Users\FMGameDev\GitHub\CGT\CMP305\CMP305_Lab03_AdvancedProceduralModelling\CMP305_Base\TerrainMesh.cpp(466,20): warning C4244: '/=': conversion from 'float' to 'int', possible loss of data
 C:\Users\FMGameDev\GitHub\CGT\CMP305\CMP305_Lab03_AdvancedProceduralModelling\CMP305_Base\TerrainMesh.cpp(430,6): warning C4101: 'center': unreferenced local variable
-C:\Users\FMGameDev\GitHub\CGT\CMP305\CMP305_Lab03_AdvancedProceduralModelling\CMP305_Base\TerrainMesh.cpp(509,60): warning C4244: '+=': conversion from 'float' to 'int', possible loss of data
-C:\Users\FMGameDev\GitHub\CGT\CMP305\CMP305_Lab03_AdvancedProceduralModelling\CMP305_Base\TerrainMesh.cpp(515,60): warning C4244: '+=': conversion from 'float' to 'int', possible loss of data
-C:\Users\FMGameDev\GitHub\CGT\CMP305\CMP305_Lab03_AdvancedProceduralModelling\CMP305_Base\TerrainMesh.cpp(521,60): warning C4244: '+=': conversion from 'float' to 'int', possible loss of data
-C:\Users\FMGameDev\GitHub\CGT\CMP305\CMP305_Lab03_AdvancedProceduralModelling\CMP305_Base\TerrainMesh.cpp(527,60): warning C4244: '+=': conversion from 'float' to 'int', possible loss of data
+  Utils.cpp
   Generating Code...
   CMP305_Base.vcxproj -> C:\Users\FMGameDev\GitHub\CGT\CMP305\CMP305_Lab03_AdvancedProceduralModelling\x64\Debug\CMP305_Base.exe

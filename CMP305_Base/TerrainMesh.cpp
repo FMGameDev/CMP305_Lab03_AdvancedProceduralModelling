@@ -489,7 +489,8 @@ void TerrainMesh::SquareStep(int& m_start, int& m_end, int& n_start, int& n_end,
 			int center = GetHeightMapIndex(k + half, i + half);
 
 			// set the height to the center point
-			heightMap[center] = cornersAvg + Utils::GetRandom(tmpHeightOffsetRange);
+			float randomHeightOffset = Utils::GetRandom(tmpHeightOffsetRange);
+			heightMap[center] = cornersAvg + randomHeightOffset;
 		}
 	}
 }
@@ -501,7 +502,7 @@ void TerrainMesh::DiamondStep(int& m_start, int& m_end, int& n_start, int& n_end
 		for (int i = (k + half) % chunkSize; i <= n_end; i += chunkSize)
 		{
 			int count = 0;
-			int cornersSum = 0;
+			float cornersSum = 0;
 
 			// top corner
 			if (InBounds(k - half, i))
@@ -535,7 +536,8 @@ void TerrainMesh::DiamondStep(int& m_start, int& m_end, int& n_start, int& n_end
 			int center = GetHeightMapIndex(k, i);
 
 			// set the value to the center point of the diamond
-			heightMap[center] = cornersAvg + Utils::GetRandom(tmpHeightOffsetRange);
+			float random = Utils::GetRandom(tmpHeightOffsetRange);
+			heightMap[center] = cornersAvg + random;
 		}
 	}
 

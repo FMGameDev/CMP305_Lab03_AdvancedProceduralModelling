@@ -127,7 +127,7 @@ void App1::gui()
 	// Set Height Offset Range
 	Range heightOffsetRange = m_Terrain->GetHeightOffsetRange();
 	float range[2] = { heightOffsetRange.min, heightOffsetRange.max };
-	ImGui::SliderFloat2("Height Offset Range (min-max)", range, 0.0f, 50.0f);
+	ImGui::SliderFloat2("Height Offset Range (min-max)", range, -20.0f, 20.0f);
 	if (range[0] != heightOffsetRange.min || range[1] != heightOffsetRange.max)
 	{
 		heightOffsetRange.min = range[0];

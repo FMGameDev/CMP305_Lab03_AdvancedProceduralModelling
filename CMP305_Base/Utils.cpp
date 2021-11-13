@@ -3,6 +3,14 @@
 #include <cstdlib>
 #include <ctime>
 
+#include <iostream>
+#include <random>
+#include <iomanip>
+
+using std::cout;
+using std::endl;
+using std::setprecision;
+
 
 float Utils::GetRandom(Range range)
 {
@@ -11,7 +19,7 @@ float Utils::GetRandom(Range range)
 
 float Utils::GetRandom(float from, float to)
 {
-	int min, max;
+	float min, max;
 	float randomNum;
 
 	if (from < to)
@@ -24,6 +32,15 @@ float Utils::GetRandom(float from, float to)
 		min = to;
 		max = from;
 	}
-	randomNum = float(std::rand() % (max + 1 - min) + min);// (rand() % (max + 1 - min) + min);//(min + static_cast <float> (rand()) / (static_cast <float> (RAND_MAX / (max - min))));
+
+	std::random_device rd;
+	std::default_random_engine eng(rd());
+	std::uniform_real_distribution<float> distr(min, max);
+
+	randomNum = distr(eng);
+	cout << "Random Num:" << randomNum << "\n";
+
 	return randomNum;
 }
+
+
