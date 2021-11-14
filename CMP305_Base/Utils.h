@@ -20,5 +20,7 @@ class Utils
 {
 public:
 	static float GetRandom(Range range);
+	// Function from:
+	// https://www.delftstack.com/howto/cpp/how-to-generate-random-float-number-in-cpp/
 	static float GetRandom(float from, float to);
 };
